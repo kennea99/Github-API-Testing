@@ -34,6 +34,9 @@
         const response = await fetch(url)
 
         const data = await response.json()
+        const info = document.createTextNode("Returns all public repositories on Github with more than 50,000 stars.")
+        divResult.append(info);
+        divResult.appendChild(document.createElement("br"));
         data.items.forEach(i =>{
             const anchor = document.createElement("a")
             anchor.href = i.html_url;
