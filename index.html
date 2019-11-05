@@ -7,11 +7,19 @@
     <title>Github API Testing</title>
 </head>
 <body>
-    <h1>Github </h1>
-    <button id = 'buttonRepos'>Public Repos</button>
-    <button id = 'btnPrivate'>account</button>
+    <h1>Github API Test </h1>
+    <button id = 'buttonRepos'>Public Repos Stars</button>
     <div id = 'divResult'>
     </div>
+    <h2>Logged in Developer</h2>
+    <form name="login" onSubmit = "return validateUser();">
+        <label>username</label>
+        <input type="text" name="uName" placeholder="username"> 
+        <label>password</label>
+        <input type="password" name="pswrd" placeholder="password">
+        <input type="submit" value="confirm" />
+    </form>
+
 
     <script>
 
@@ -19,10 +27,10 @@
     const btnPrivate = document.getElementById("btnPrivate")
     const divResult  = document.getElementById("divResult")
     buttonRepos.addEventListener("click", getRepos)
-    btnPrivate.addEventListener("click", getRepos1)
+    //btnPrivate.addEventListener("click", loggedInDetails)
     async function getRepos(){
         clearPage();
-        const url = "https://api.github.com/search/repositories?q=stars:>100000"
+        const url = "https://api.github.com/search/repositories?q=stars:>50000"
         const response = await fetch(url)
 
         const data = await response.json()
@@ -36,26 +44,63 @@
 
     }
 
-    async function getRepos1(){
+    async function loggedInDetails(user, pass){
+        const username = user;
+        const password = pass;
+
+        const header = {
+            "Authorization" : "Basic " + btoa(username+":"+password)
+        }
+        const url = "https://api.github.com/user";
+        const response = await fetch(url, {"method": "GET", "headers": header});
+        const data = await response.json();
+        if(response.status != 200)
+        {
+            clearPage();
+            alert("error, wrong username or password, refresh and try again.")
+        }
+        else{
         clearPage();
-        const url = "https://api.github.com"
-        const response = await fetch(url)
+        const username = document.createElement("a");
+        username.href = data.html_url;
+        username.textContent = data.login;
+        const profileBio = document.createTextNode("Bio: " +data.bio);
+        const fullName = document.createTextNode("Name: " +data.name);
+        const pubRepos = document.createTextNode("Public Repositories: " +data.public_repos);
+        const privRepos = document.createTextNode("Private Repositories: " +data.total_private_repos);
+        const twoFact = document.createTextNode("Two Factor Authenticated? " +data.two_factor_authentication);
+        divResult.appendChild(username);
+        divResult.appendChild(document.createElement("br"))
+        divResult.appendChild(profileBio)
+        divResult.appendChild(document.createElement("br"))
+        divResult.appendChild(fullName)
+        divResult.appendChild(document.createElement("br"))
+        divResult.appendChild(pubRepos)
+        divResult.appendChild(document.createElement("br"))
+        divResult.appendChild(privRepos)
+        divResult.appendChild(document.createElement("br"))
+        divResult.appendChild(twoFact)
+        divResult.appendChild(document.createElement("br"))
+        
 
-        const data = await response.json()
-        /*data.items.forEach(i =>{
-            const anchor = document.createElement("a")
-            anchor.href = i.html_url;
-            anchor.textContent = i.full_name;
-            divResult.appendChild(anchor)
-            divResult.appendChild(document.createElement("br"))
-        })*/
-
+        //console.log("public repositories " +data.public_repos +"\n");
+        //console.log("private repositores " +data.total_private_repos +"\n");
+        //console.log("Two factor Authenticated active? " +data.two_factor_authentication +"\n")
+        }        
     }
 
 
     function clearPage(){
         while(divResult.firstChild) 
             divResult.removeChild(divResult.firstChild)
+    }
+
+    function validateUser()
+    {
+        var u = document.login.uName.value;
+        var p = document.login.pswrd.value;
+        loggedInDetails(u, p);
+        return false;
     }
     </script>
 
