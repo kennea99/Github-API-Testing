@@ -20,7 +20,7 @@
 <script>function importStars()
     {
 
-var margin = {top: 200, right: 200, bottom: 300, left: 400},
+var margin = {top: 40, right: 40, bottom: 60, left: 80},
         width = 1000 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
@@ -41,14 +41,16 @@ var svg = d3.select("body").append("svg")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
 
-
+        
         d3.json("https://api.github.com/search/repositories?q=stars:>100000", function(data)
         {
-        results = data.items;
+        var results = data.items;
         console.log(results);
-        console.log(results.stargazers_count);
-
-        //x.domain(data.map(function(d) {return d.name ;}));
+        for( var i = 0; i < results.length; i++)
+        {
+        console.log(results[i].stargazers_count);
+        }
+        x.domain(results.map(function(d) {return d.name  ;}));
         y.domain([0, d3.max(results, function(d) {return d.stargazers_count;})]);
 
         svg.selectAll(".bar")
