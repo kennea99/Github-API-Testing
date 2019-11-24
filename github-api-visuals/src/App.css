@@ -1,6 +1,7 @@
 
 body {
-  color: turquoise;
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 }
 
 .navbar {
@@ -8,10 +9,12 @@ body {
   font-size: 68px;
   font-family: "Georgia";
   color: white;
-  background-color: steelblue
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 }
 .search {
-  background-color: steelblue;
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   padding: 10px;
 }
 
@@ -19,4 +22,6 @@ body {
   margin: 50px;
 
 }
+
+
 

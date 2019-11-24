@@ -1,14 +1,21 @@
 import React from 'react';
+import {useState} from 'react';
 import { Form } from 'semantic-ui-react';
 import { Chart } from 'chart.js';
 
 import './App.css';
+import { Verify } from 'crypto';
 
 
 
 
 function App() {
-  
+  var chart;
+  var results;
+
+  const [repoInput, setRepoInput] = React.useState('');
+  //const [results, SetData] = React.useState('');
+
   async function getStars()
   {
     const url = "https://api.github.com/search/repositories?q=stars:>50000"
@@ -23,7 +30,7 @@ function App() {
     }
 
     var ctx = document.getElementById("Chart");
-    var myChart = new Chart(ctx, {type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars], backgroundColor: 'rgba(255,99,132,1)' , borderColor: 'rgba(255,99,132,1)', borderWidth: 1}]},
+    chart = new Chart(ctx, { type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars], backgroundColor: 'rgba(255,99,132,.5)' , borderColor: 'rgba(255,99,132,1)', borderWidth: 1}]},
     options: {
       responsive: false,
       scales: {
@@ -38,9 +45,60 @@ function App() {
             beginAtZero: true
           }
         }]
+      },
+      title: {
+        display: true,
+        text: 'Repositories with most stars.'
       }
     }
   });
+  }
+
+  function getSearchData(e)
+  {
+    setRepoInput(e.target.value);
+    //console.log(repoInput);
+  }
+
+  async function getRepos()
+  {
+    const url = "https://api.github.com/search/repositories?q=" +repoInput;
+    const response = await fetch(url);
+    const data = await response.json();
+   
+    console.log(data);
+    Verify(repoInput, data);
+  }
+  
+  function Verify(repoInput, data)
+  {
+    let matched = -1;
+    if(data.total_count===0)
+    {
+      matched =-2;
+    }
+    console.log(data.items.length);
+    for(var i = 0; i<data.items.length; i++)
+    {
+      if(repoInput === data.items[i].name) {
+        matched = i;
+      }
+    }
+    if(matched === -1) {
+      results = data.items[0];
+    }
+    else {
+      results = data.items[matched];
+      console.log(results);
+    }
+  }
+  
+
+
+
+  function clear()
+  {
+    chart.destroy();
   }
 
   return (
@@ -48,13 +106,21 @@ function App() {
       <div>
         <div className= 'navbar'>Github API Visualisations</div>
         <div className= 'search'>
-          <Form onSubmit={getStars}>
+          <Form>
             <Form.Group>
-              <Form.Input placeholder= 'Repository' name='name'/>
-              <Form.Button content= 'Submit'/>
-              <Form.Button content= 'Top Stars' data-content ="shows a graph of the repositories with the most stars."/>
+              <Form.Input placeholder= 'Repository' name='name' onChange={getSearchData}/>
+              <Form onSubmit={getRepos}>
+              <Form.Button content= 'Submit' />
+              </Form>
+              <Form onSubmit={getStars}>
+                <Form.Button content= 'Top Stars'/>
+              </Form>
+              <Form onSubmit={clear}>
+                <Form.Button content= 'Clear Page'/>
+              </Form>
             </Form.Group>
           </Form>
+
         </div>
         <div className = 'chart'>
         <canvas id="Chart" width="1500" height="800"></canvas>
