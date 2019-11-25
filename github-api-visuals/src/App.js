@@ -11,14 +11,13 @@ import './App.css';
 
 function App() {
   var chart;
-  var results;
+  
 
   const [repoInput, setRepoInput] = React.useState('');
-  //const [results, SetData] = React.useState('');
 
   async function getStars()
   {
-    const url = "https://api.github.com/search/repositories?q=stars:>50000"
+    const url = "https://api.github.com/search/repositories?q=stars:>75000"
     const response = await fetch(url);
     const data = await response.json();
     let stars = [];
@@ -28,9 +27,9 @@ function App() {
       stars[i] = data.items[i].stargazers_count;
       names[i] = data.items[i].name;
     }
-
+    var pointBackgroundColors = [];
     var ctx = document.getElementById("Chart");
-    chart = new Chart(ctx, { type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars], backgroundColor: 'rgba(255,99,132,.5)' , borderColor: 'rgba(255,99,132,1)', borderWidth: 1}]},
+    chart = new Chart(ctx, { type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars],backgroundColor: pointBackgroundColors , borderColor: 'black', borderWidth: 1}]},
     options: {
       responsive: false,
       scales: {
@@ -50,8 +49,18 @@ function App() {
         display: true,
         text: 'Repositories with most stars.'
       }
+      
     }
+    
   });
+  for(i = 0; i< names.length; i++)
+  {
+    var r = Math.floor(Math.random() * 200);
+    var g = Math.floor(Math.random() * 200);
+    var b = Math.floor(Math.random() * 200);
+    pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+    chart.update();
+  }
   }
 
   function getSearchData(e)
@@ -78,7 +87,6 @@ function App() {
       names[i] = data[i].login;
       contribute[i] = data[i].contributions
     }
-    var index = 30;
     var pointBackgroundColors = [];
     var ctx = document.getElementById("Chart");
     chart = new Chart(ctx, {type: 'doughnut', 
@@ -165,7 +173,7 @@ function App() {
 
         </div>
         <div className = 'chart'>
-        <canvas id="Chart" width="1500" height="800"></canvas>
+        <canvas id="Chart" width="1500" height="700"></canvas>
         </div>
         <script>
         </script>
