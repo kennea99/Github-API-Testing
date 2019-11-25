@@ -62,12 +62,17 @@ function App() {
 
   async function getRepos()
   {
-    const url = "https://api.github.com/search/repositories?q=" +repoInput;
+    const url = "https://api.github.com/repos/"+repoInput+"/"+repoInput+"/contributors";
     const response = await fetch(url);
     const data = await response.json();
-   
+    if(data.message === "Not Found")
+    {
+      alert("not a repo")
+    }
+    else{
     console.log(data);
     Verify(repoInput, data);
+    }
   }
   
   function Verify(repoInput, data)
@@ -77,7 +82,7 @@ function App() {
     {
       matched =-2;
     }
-    console.log(data.items.length);
+    //console.log(data.items.length);
     for(var i = 0; i<data.items.length; i++)
     {
       if(repoInput === data.items[i].name) {
