@@ -71,11 +71,11 @@ function App() {
     }
     else{
     console.log(data);
-    Verify(repoInput, data);
+    //Verify(repoInput, data);
     }
   }
   
-  function Verify(repoInput, data)
+  /*function Verify(repoInput, data)
   {
     let matched = -1;
     if(data.total_count===0)
@@ -97,6 +97,7 @@ function App() {
       console.log(results);
     }
   }
+  */
   
 
 
