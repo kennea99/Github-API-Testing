@@ -4,7 +4,7 @@ import { Form } from 'semantic-ui-react';
 import { Chart } from 'chart.js';
 
 import './App.css';
-import { Verify } from 'crypto';
+
 
 
 
@@ -67,14 +67,47 @@ function App() {
     const data = await response.json();
     if(data.message === "Not Found")
     {
-      alert("not a repo")
+      alert("Not a Valid Repo, try again.")
     }
-    else{
+    else{ //draw bubble graph
     console.log(data);
-    //Verify(repoInput, data);
+    let names = [];
+    let contribute = [];
+    for(var i = 0; i < data.length; i++)
+    {
+      names[i] = data[i].login;
+      contribute[i] = data[i].contributions
+    }
+    var index = 30;
+    var pointBackgroundColors = [];
+    var ctx = document.getElementById("Chart");
+    chart = new Chart(ctx, {type: 'doughnut', 
+        data: {
+            labels: [...names],
+            datasets: [{
+              label: 'Contributors.',
+              data: [...contribute],
+              backgroundColor: pointBackgroundColors,
+            }
+          ]
+        },
+
+      });
+
+      for(i = 0; i< names.length; i++)
+      {
+        var r = Math.floor(Math.random() * 200);
+        var g = Math.floor(Math.random() * 200);
+        var b = Math.floor(Math.random() * 200);
+        pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+        chart.update();
+      }
     }
   }
-  
+
+
+
+    //Verify(repoInput, data);
   /*function Verify(repoInput, data)
   {
     let matched = -1;
@@ -104,7 +137,10 @@ function App() {
 
   function clear()
   {
+    if(chart !== null)
+    {
     chart.destroy();
+    }
   }
 
   return (
