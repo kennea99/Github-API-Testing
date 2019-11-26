@@ -1,8 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
 import { Form } from 'semantic-ui-react';
 import { Chart } from 'chart.js';
-
 import './App.css';
 
 
@@ -11,8 +9,7 @@ import './App.css';
 
 function App() {
   var chart;
-  
-
+  var chartDisplayed = false;
   const [repoInput, setRepoInput] = React.useState('');
 
   async function getStars()
@@ -27,6 +24,7 @@ function App() {
       stars[i] = data.items[i].stargazers_count;
       names[i] = data.items[i].name;
     }
+    chartDisplayed = true;
     var pointBackgroundColors = [];
     var ctx = document.getElementById("Chart");
     chart = new Chart(ctx, { type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars],backgroundColor: pointBackgroundColors , borderColor: 'black', borderWidth: 1}]},
@@ -46,8 +44,10 @@ function App() {
         }]
       },
       title: {
+        fontColor: '#6666ff',
+        fontSize: 36,
         display: true,
-        text: 'Repositories with most stars.'
+        text: 'Repositories with most stars. (Greater than 75,000 stars.)'
       }
       
     }
@@ -78,8 +78,9 @@ function App() {
     {
       alert("Not a Valid Repo, try again.")
     }
-    else{ //draw bubble graph
-    console.log(data);
+    else{ 
+    chartDisplayed = true;
+    //console.log(data);
     let names = [];
     let contribute = [];
     for(var i = 0; i < data.length; i++)
@@ -99,6 +100,14 @@ function App() {
             }
           ]
         },
+        options: {
+        title: {
+          fontSize: 30,
+          fontColor: '#6666ff',
+          display: true,
+          text: 'Doughnut chart which lists all contributors of the searched repo and how much of a contribution they have made.'
+        }
+      }
 
       });
 
@@ -110,6 +119,55 @@ function App() {
         pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
         chart.update();
       }
+    }
+  }
+
+  async function getLanguagesRepo()
+  {
+    const url =  "https://api.github.com/repos/"+repoInput+"/"+repoInput+"/languages";
+    const response = await fetch(url);
+    const data = await response.json();
+    if(data.message === "Not Found")
+    {
+      alert("Not a Valid Repo, try again.")
+    }
+    else {
+      chartDisplayed = true;
+      let languageName = [];
+      let bytesUsed = [];
+      var pointBackgroundColors = [];
+      for(var i = 0; i < Object.keys(data).length; i++)
+      {
+        languageName[i] = Object.keys(data)[i];
+        bytesUsed[i] = Object.values(data)[i];
+      }
+      var ctx = document.getElementById("Chart").getContext('2d');
+      chart = new Chart(ctx, {type: 'pie',
+          data:{
+            labels: [...languageName],
+            datasets: [{
+              label: 'Languages Used.',
+              data: [...bytesUsed],
+              backgroundColor: pointBackgroundColors,
+            }]
+          },
+          options:{
+          title: {
+            fontColor: '#6666ff',
+            fontSize: 36,
+            display: true,
+            text: 'Piechart showing what programming languages are used in the repo.'
+          }
+        }
+        });
+        for(i = 0; i< languageName.length; i++)
+        {
+        var r = Math.floor(Math.random() * 200);
+        var g = Math.floor(Math.random() * 200);
+        var b = Math.floor(Math.random() * 200);
+        pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+        chart.update();
+       }
     }
   }
 
@@ -140,16 +198,18 @@ function App() {
   }
   */
   
-
-
-
   function clear()
   {
-    if(chart !== null)
+    if(chartDisplayed === true)
     {
-    chart.destroy();
+      chart.destroy();
+    }
+    else{
+      chartDisplayed = false;
     }
   }
+
+
 
   return (
       
@@ -160,13 +220,16 @@ function App() {
             <Form.Group>
               <Form.Input placeholder= 'Repository' name='name' onChange={getSearchData}/>
               <Form onSubmit={getRepos}>
-              <Form.Button content= 'Submit' />
+              <Form.Button content= 'Search for Contributions' color = 'teal' />
+              </Form>
+              <Form onSubmit={getLanguagesRepo}>
+              <Form.Button content= 'Search what languages are used.' color= 'teal' />
               </Form>
               <Form onSubmit={getStars}>
-                <Form.Button content= 'Top Stars'/>
+                <Form.Button content= 'Top Stars' color= 'teal'  />
               </Form>
               <Form onSubmit={clear}>
-                <Form.Button content= 'Clear Page'/>
+                <Form.Button content= 'Clear Page' color= 'red'/>
               </Form>
             </Form.Group>
           </Form>
