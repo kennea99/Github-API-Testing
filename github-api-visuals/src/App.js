@@ -11,6 +11,7 @@ function App() {
   var chart;
   var chartDisplayed = false;
   const [repoInput, setRepoInput] = React.useState('');
+  const [orgInput, setOrgInput] = React.useState('');
 
   async function getStars()
   {
@@ -19,26 +20,35 @@ function App() {
     const data = await response.json();
     let stars = [];
     let names = [];
+    let owners = [];
     for(var i = 0; i <data.items.length; i++)
     {
       stars[i] = data.items[i].stargazers_count;
       names[i] = data.items[i].name;
+      owners[i] = data.items[i].owner.login
+    }
+    //for loop which combines the organisation name with the repo name.
+    for(i = 0; i <owners.length; i++)
+    {
+      owners[i] = owners[i]+'/'+names[i];
     }
     chartDisplayed = true;
     var pointBackgroundColors = [];
     var ctx = document.getElementById("Chart");
-    chart = new Chart(ctx, { type: 'bar', data: { labels: [...names], datasets: [{label: 'Stars', data:[...stars],backgroundColor: pointBackgroundColors , borderColor: 'black', borderWidth: 1}]},
+    chart = new Chart(ctx, { type: 'bar', data: { labels: [...owners], datasets: [{label: 'Stars', data:[...stars],backgroundColor: pointBackgroundColors , borderColor: 'black', borderWidth: 1}]},
     options: {
       responsive: false,
       scales: {
         xAxes: [{
           ticks: {
+            fontColor: 'black',
             maxRotation: 90,
             minRotation: 80
           }
         }],
         yAxes: [{
           ticks: {
+            fontColor: 'black',
             beginAtZero: true
           }
         }]
@@ -48,7 +58,12 @@ function App() {
         fontSize: 36,
         display: true,
         text: 'Repositories with most stars. (Greater than 75,000 stars.)'
-      }
+      },
+      legend: {
+      labels: {
+        fontColor: 'black'
+      },
+    }
       
     }
     
@@ -63,15 +78,21 @@ function App() {
   }
   }
 
-  function getSearchData(e)
+  function getRepoData(e)
   {
     setRepoInput(e.target.value);
     //console.log(repoInput);
   }
 
+  function getOrgData(e)
+  {
+    setOrgInput(e.target.value);
+    //console.log(repoInput);
+  }
+
   async function getRepos()
   {
-    const url = "https://api.github.com/repos/"+repoInput+"/"+repoInput+"/contributors";
+    const url = "https://api.github.com/repos/"+orgInput+"/"+repoInput+"/contributors";
     const response = await fetch(url);
     const data = await response.json();
     if(data.message === "Not Found")
@@ -124,7 +145,7 @@ function App() {
 
   async function getLanguagesRepo()
   {
-    const url =  "https://api.github.com/repos/"+repoInput+"/"+repoInput+"/languages";
+    const url =  "https://api.github.com/repos/"+orgInput+"/"+repoInput+"/languages";
     const response = await fetch(url);
     const data = await response.json();
     if(data.message === "Not Found")
@@ -203,6 +224,7 @@ function App() {
     if(chartDisplayed === true)
     {
       chart.destroy();
+      chartDisplayed = false;
     }
     else{
       chartDisplayed = false;
@@ -213,20 +235,23 @@ function App() {
 
   return (
       
-      <div>
+      <div style={{backgroundColor: 'powderblue'}}>
+
         <div className= 'navbar'>Github API Visualisations</div>
         <div className= 'search'>
           <Form>
             <Form.Group>
-              <Form.Input placeholder= 'Repository' name='name' onChange={getSearchData}/>
+              <Form.Input placeholder= 'Organisation...' name='name' onChange={getOrgData}/>
+              <div className= 'slash'>/</div>
+              <Form.Input placeholder= 'Repository...' name='name' onChange={getRepoData}/>
               <Form onSubmit={getRepos}>
               <Form.Button content= 'Search for Contributions' color = 'teal' />
               </Form>
               <Form onSubmit={getLanguagesRepo}>
               <Form.Button content= 'Search what languages are used.' color= 'teal' />
               </Form>
-              <Form onSubmit={getStars}>
-                <Form.Button content= 'Top Stars' color= 'teal'  />
+              <Form onSubmit={getStars} >
+                <Form.Button content= 'Top Stars' color= 'teal'   />
               </Form>
               <Form onSubmit={clear}>
                 <Form.Button content= 'Clear Page' color= 'red'/>
@@ -236,7 +261,7 @@ function App() {
 
         </div>
         <div className = 'chart'>
-        <canvas id="Chart" width="1500" height="700"></canvas>
+        <canvas id="Chart" width="1400" height="700"></canvas>
         </div>
         <script>
         </script>
