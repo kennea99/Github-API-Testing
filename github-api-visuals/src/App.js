@@ -15,9 +15,14 @@ function App() {
 
   async function getStars()
   {
+    if(chartDisplayed === true)
+    {
+      clear();
+    }
     const url = "https://api.github.com/search/repositories?q=stars:>75000"
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data);
     let stars = [];
     let names = [];
     let owners = [];
@@ -66,6 +71,7 @@ function App() {
     }
       
     }
+  
     
   });
   for(i = 0; i< names.length; i++)
@@ -76,7 +82,8 @@ function App() {
     pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
     chart.update();
   }
-  }
+  
+}
 
   function getRepoData(e)
   {
@@ -92,6 +99,10 @@ function App() {
 
   async function getRepos()
   {
+    if(chartDisplayed === true)
+    {
+      clear();
+    }
     const url = "https://api.github.com/repos/"+orgInput+"/"+repoInput+"/contributors";
     const response = await fetch(url);
     const data = await response.json();
@@ -145,6 +156,10 @@ function App() {
 
   async function getLanguagesRepo()
   {
+    if(chartDisplayed === true)
+    {
+      clear();
+    }
     const url =  "https://api.github.com/repos/"+orgInput+"/"+repoInput+"/languages";
     const response = await fetch(url);
     const data = await response.json();
