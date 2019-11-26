@@ -235,7 +235,7 @@ function App() {
 
   return (
       
-      <div style={{backgroundColor: 'powderblue'}}>
+      <div style={{backgroundColor: 'powderblue' }}>
 
         <div className= 'navbar'>Github API Visualisations</div>
         <div className= 'search'>
