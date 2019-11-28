@@ -39,7 +39,7 @@ function App() {
     }
     chartDisplayed = true;
     var pointBackgroundColors = [];
-    var ctx = document.getElementById("Chart");
+    var ctx = document.getElementById("Chart").getContext("2d");
     chart = new Chart(ctx, { type: 'bar', data: { labels: [...owners], datasets: [{label: 'Stars', data:[...stars],backgroundColor: pointBackgroundColors , borderColor: 'black', borderWidth: 1}]},
     options: {
       responsive: false,
@@ -79,7 +79,7 @@ function App() {
     var r = Math.floor(Math.random() * 200);
     var g = Math.floor(Math.random() * 200);
     var b = Math.floor(Math.random() * 200);
-    pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+    pointBackgroundColors.push('rgba('+r+','+ g+','+ b+',.5)');
     chart.update();
   }
   
@@ -121,7 +121,7 @@ function App() {
       contribute[i] = data[i].contributions
     }
     var pointBackgroundColors = [];
-    var ctx = document.getElementById("Chart");
+    var ctx = document.getElementById("Chart").getContext("2d");
     chart = new Chart(ctx, {type: 'doughnut', 
         data: {
             labels: [...names],
@@ -148,7 +148,7 @@ function App() {
         var r = Math.floor(Math.random() * 200);
         var g = Math.floor(Math.random() * 200);
         var b = Math.floor(Math.random() * 200);
-        pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+        pointBackgroundColors.push('rgba('+r+','+ g+','+ b+',.5)');
         chart.update();
       }
     }
@@ -201,7 +201,7 @@ function App() {
         var r = Math.floor(Math.random() * 200);
         var g = Math.floor(Math.random() * 200);
         var b = Math.floor(Math.random() * 200);
-        pointBackgroundColors.push('rgb('+r+','+ g+','+ b+')');
+        pointBackgroundColors.push('rgba('+r+','+ g+','+ b+',.5)');
         chart.update();
        }
     }
