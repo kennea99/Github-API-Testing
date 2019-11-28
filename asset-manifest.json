@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/github-api-visuals/static/css/main.83d2c882.chunk.css",
+    "main.js": "/github-api-visuals/static/js/main.5e3296c5.chunk.js",
+    "main.js.map": "/github-api-visuals/static/js/main.5e3296c5.chunk.js.map",
+    "runtime-main.js": "/github-api-visuals/static/js/runtime-main.56354f90.js",
+    "runtime-main.js.map": "/github-api-visuals/static/js/runtime-main.56354f90.js.map",
+    "static/css/2.60266492.chunk.css": "/github-api-visuals/static/css/2.60266492.chunk.css",
+    "static/js/2.9e9054c5.chunk.js": "/github-api-visuals/static/js/2.9e9054c5.chunk.js",
+    "static/js/2.9e9054c5.chunk.js.map": "/github-api-visuals/static/js/2.9e9054c5.chunk.js.map",
+    "index.html": "/github-api-visuals/index.html",
+    "precache-manifest.ddd8432654aa3a6edba40fea8a04965c.js": "/github-api-visuals/precache-manifest.ddd8432654aa3a6edba40fea8a04965c.js",
+    "service-worker.js": "/github-api-visuals/service-worker.js",
+    "static/css/2.60266492.chunk.css.map": "/github-api-visuals/static/css/2.60266492.chunk.css.map",
+    "static/css/main.83d2c882.chunk.css.map": "/github-api-visuals/static/css/main.83d2c882.chunk.css.map",
+    "static/media/semantic.min.css": "/github-api-visuals/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.56354f90.js",
+    "static/css/2.60266492.chunk.css",
+    "static/js/2.9e9054c5.chunk.js",
+    "static/css/main.83d2c882.chunk.css",
+    "static/js/main.5e3296c5.chunk.js"
+  ]
+}
