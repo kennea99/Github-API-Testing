@@ -276,7 +276,7 @@ function App() {
 
         </div>
         <div className = 'chart'>
-        <canvas id="Chart" width="1400" height="700"></canvas>
+        <canvas id="Chart" width="1000" height="550"></canvas>
         </div>
         <script>
         </script>
