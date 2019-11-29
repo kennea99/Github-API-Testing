@@ -1,5 +1,5 @@
 # Github-API-Testing
-Github API data visualisations in javascript. uses React.js, Chart.js
+Github API data visualisations in javascript. uses React.js, Chart.js and Semantic-UI.
 
 
 ** Make sure to have npm installed on your computer (Node.js Packet Manager).
