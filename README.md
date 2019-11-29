@@ -1,8 +1,8 @@
 # Github-API-Testing
-Github API data visualisations in javascript. uses React.js, Chart.js
+Github API data visualisations in javascript. uses React.js, Chart.js and Semantic-UI.
 
 
-** Make sure to have npm installed on your computer  
+** Make sure to have npm installed on your computer (Node.js Packet Manager).
 ## Running the program Locally.  
 In Order to run locally, clone the repo then travel to the github-api-visuals folder and run 'npm install'.
 Then run 'npm start'.
@@ -16,4 +16,6 @@ To search for a repository, in the first search box, type in a user or an organi
 The 'Search for Contributions' button will display a doughnut chart with all of the contributors of the searched repo and how many contributions they have.  
 The 'Search for what languages used' button will display a pie chart of all languages used in the repo and how many bytes each language uses.
 
-make sure to press 'clear page' if you want to display a different chart. A good way to get some organisation and their repos, run the top stars button and the top organisations and repos will display and can be used in the search bar.
+make sure to press 'clear page' if you want to display a different chart. A good way to get some organisation and their repos, run the top stars button and the top organisations and repos will display and can be used in the search bar.  
+
+"app.js" is where most of the code was written.
