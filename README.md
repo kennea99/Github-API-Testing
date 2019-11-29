@@ -2,7 +2,7 @@
 Github API data visualisations in javascript. uses React.js, Chart.js
 
 
-** Make sure to have npm installed on your computer  
+** Make sure to have npm installed on your computer (Node.js Packet Manager).
 ## Running the program Locally.  
 In Order to run locally, clone the repo then travel to the github-api-visuals folder and run 'npm install'.
 Then run 'npm start'.
