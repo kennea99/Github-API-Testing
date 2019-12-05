@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Github-API-Testing/static/css/main.83d2c882.chunk.css",
-    "main.js": "/Github-API-Testing/static/js/main.303556ce.chunk.js",
-    "main.js.map": "/Github-API-Testing/static/js/main.303556ce.chunk.js.map",
-    "runtime-main.js": "/Github-API-Testing/static/js/runtime-main.55075c3f.js",
-    "runtime-main.js.map": "/Github-API-Testing/static/js/runtime-main.55075c3f.js.map",
-    "static/css/2.eddf38c2.chunk.css": "/Github-API-Testing/static/css/2.eddf38c2.chunk.css",
-    "static/js/2.9e9054c5.chunk.js": "/Github-API-Testing/static/js/2.9e9054c5.chunk.js",
-    "static/js/2.9e9054c5.chunk.js.map": "/Github-API-Testing/static/js/2.9e9054c5.chunk.js.map",
-    "index.html": "/Github-API-Testing/index.html",
-    "precache-manifest.c66e49b7d100d590b07081c016abb960.js": "/Github-API-Testing/precache-manifest.c66e49b7d100d590b07081c016abb960.js",
-    "service-worker.js": "/Github-API-Testing/service-worker.js",
-    "static/css/2.eddf38c2.chunk.css.map": "/Github-API-Testing/static/css/2.eddf38c2.chunk.css.map",
-    "static/css/main.83d2c882.chunk.css.map": "/Github-API-Testing/static/css/main.83d2c882.chunk.css.map",
-    "static/media/semantic.min.css": "/Github-API-Testing/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/github-api-visuals/static/css/main.83d2c882.chunk.css",
+    "main.js": "/github-api-visuals/static/js/main.7a4e7ddf.chunk.js",
+    "main.js.map": "/github-api-visuals/static/js/main.7a4e7ddf.chunk.js.map",
+    "runtime-main.js": "/github-api-visuals/static/js/runtime-main.56354f90.js",
+    "runtime-main.js.map": "/github-api-visuals/static/js/runtime-main.56354f90.js.map",
+    "static/css/2.60266492.chunk.css": "/github-api-visuals/static/css/2.60266492.chunk.css",
+    "static/js/2.9e9054c5.chunk.js": "/github-api-visuals/static/js/2.9e9054c5.chunk.js",
+    "static/js/2.9e9054c5.chunk.js.map": "/github-api-visuals/static/js/2.9e9054c5.chunk.js.map",
+    "index.html": "/github-api-visuals/index.html",
+    "precache-manifest.4df23dd4584ec90e8eb1ba500847215f.js": "/github-api-visuals/precache-manifest.4df23dd4584ec90e8eb1ba500847215f.js",
+    "service-worker.js": "/github-api-visuals/service-worker.js",
+    "static/css/2.60266492.chunk.css.map": "/github-api-visuals/static/css/2.60266492.chunk.css.map",
+    "static/css/main.83d2c882.chunk.css.map": "/github-api-visuals/static/css/main.83d2c882.chunk.css.map",
+    "static/media/semantic.min.css": "/github-api-visuals/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.55075c3f.js",
-    "static/css/2.eddf38c2.chunk.css",
+    "static/js/runtime-main.56354f90.js",
+    "static/css/2.60266492.chunk.css",
     "static/js/2.9e9054c5.chunk.js",
     "static/css/main.83d2c882.chunk.css",
-    "static/js/main.303556ce.chunk.js"
+    "static/js/main.7a4e7ddf.chunk.js"
   ]
 }
